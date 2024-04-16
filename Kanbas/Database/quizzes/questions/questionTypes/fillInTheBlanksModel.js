@@ -1,7 +1,7 @@
 import questionModel from "../questionModel.js"
 import fillInTheBlanksSchema from "./fillInTheBlanksSchema.js"
 
-const fillInTheBlanksModel = questionModel.discriminator("FillInTheBlanksModel", fillInTheBlanksSchema)
+const fillInTheBlanksModel = questionModel.discriminator("fillInTheBlanks", fillInTheBlanksSchema)
 
 export default fillInTheBlanksModel
 

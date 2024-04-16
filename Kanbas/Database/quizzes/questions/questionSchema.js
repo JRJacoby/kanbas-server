@@ -3,9 +3,6 @@ import mongoose from "mongoose"
 export const questionTypes = ['trueFalse', 'multipleChoice', 'fillInTheBlanks']
 
 const questionSchema = new mongoose.Schema({
-	// Explicitly include _id as a field so question documents that are
-	// nested inside quiz documents are automatically assigned an _id
-	_id: {type: mongoose.Schema.Types.ObjectId, auto: true},
 	title: {type: String, required: true, default: 'New Question Title'},
 	questionText: {type: String, required: true, default: 'New Question Text'},
 
@@ -26,6 +23,6 @@ const questionSchema = new mongoose.Schema({
 		enum: questionTypes,
 		default: 'multipleChoice'
 	},
-}, {discriminatorKey: 'questionType'})
+}, { collection: 'questions', discriminatorKey: 'questionType'})
 
 export default questionSchema

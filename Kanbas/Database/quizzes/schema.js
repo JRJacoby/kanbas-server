@@ -112,7 +112,7 @@ const quizSchema = new mongoose.Schema({
 		default: getEndOfDay()
 	},
 
-	questions: {type: [questionSchema], required: true, default: []},
+	questions: {type: [{type: mongoose.Schema.Types.ObjectId, ref: "QuestionModel", required: true}], default: [], required: true},
 }, {collection: "quizzes"})
 
 quizSchema.pre('validate', function(next) {

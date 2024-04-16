@@ -48,14 +48,14 @@ function QuizRoutes(app) {
 	})
 
 	app.get("/api/quizzes/:qid/:quid", async (req, res) => {
-		const {qid, quid} = req.params
-		const question = await dao.findQuestionById(qid, quid)
+		const {quid} = req.params
+		const question = await dao.findQuestionById(quid)
 		res.json(question)
 	})
 
 	app.put("/api/quizzes/:qid/:quid", async (req, res) => {
-		const {qid, quid} = req.params
-		const newQuestion = await dao.updateQuestion(qid, quid, req.body)
+		const {quid} = req.params
+		const newQuestion = await dao.updateQuestion(quid, req.body)
 		res.json(newQuestion)
 	})
 
