@@ -1,5 +1,5 @@
 import * as dao from "./dao.js"
-import {quizTypes, assignmentGroups} from "./schema.js"
+import {quizTypes, assignmentGroups, showCorrectAnswersOptions} from "./schema.js"
 import {questionTypes} from "./questions/questionSchema.js"
 
 function QuizRoutes(app) {
@@ -76,6 +76,10 @@ function QuizRoutes(app) {
 
 	app.get("/api/quizQuestionTypes", async (req, res) => {
 		res.json(questionTypes)
+	})
+
+	app.get("/api/showCorrectAnswersOptions", async (req, res) => {
+		res.json(showCorrectAnswersOptions)
 	})
 }
 

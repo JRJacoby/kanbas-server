@@ -3,7 +3,7 @@ import questionSchema from "./questions/questionSchema.js"
 
 export const quizTypes = ['Graded Quiz', 'Practice Quiz', 'Graded Survey', 'Ungraded Survey']
 export const assignmentGroups = ['Quizzes', 'Exams', 'Assignments', 'Projects']
-const showCorrectAnswersOptions = ['Never', 'Immediately', 'After Last Attempt', 'After Grading']
+export const showCorrectAnswersOptions = ['Never', 'Immediately', 'After Last Attempt', 'After Grading']
 
 const getEndOfDay = () => {
 	const now = new Date()
