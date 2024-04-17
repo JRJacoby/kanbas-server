@@ -1,5 +1,4 @@
 import mongoose from "mongoose"
-import questionSchema from "./questions/questionSchema.js"
 
 export const quizTypes = ['Graded Quiz', 'Practice Quiz', 'Graded Survey', 'Ungraded Survey']
 export const assignmentGroups = ['Quizzes', 'Exams', 'Assignments', 'Projects']
