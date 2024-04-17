@@ -10,7 +10,10 @@ const modelMap = {
 	"trueFalse": tfModel
 }
 
-export const findQuizById = (quizId) => model.findById(quizId).populate("questions")
+export const findQuizById = async (quizId) => {
+	let quiz = await model.findById(quizId).populate("questions")
+	return quiz
+}
 export const findQuizzesByCourseId = (courseId) => model.find({course: courseId}).populate("questions")
 export const findQuizzesByCourseIdAndType = (courseId, quizType) => model.find({course: courseId, quizType: quizType}).populate("questions")
 export const findQuizzesByCourseIdAndGroup = (courseId, assignmentGroup) => model.find({course: courseId, assignmentGroup: assignmentGroup}).populate("questions")
@@ -27,7 +30,24 @@ export const deleteQuiz = async (quizId) => {
 }
 
 export const findQuestionById = (questionId) => questionModel.findById(questionId)
-export const updateQuestion = (questionId, question) => questionModel.findOneAndUpdate({_id: questionId}, {$set: question}, {new: true})
+export const updateQuestion = async (questionId, question) => {
+	console.log(`updateQuestion incoming question: ${JSON.stringify(question)}`)
+	let oldQuestion = await questionModel.findById(questionId)
+	console.log(`oldQuestion: ${JSON.stringify(oldQuestion)}`)
+	const specificModel = modelMap[question.questionType]
+
+	if (oldQuestion.questionType == question.questionType) {
+		console.log(`same question type`)
+		return specificModel.findOneAndUpdate({_id: questionId}, {$set: question}, {new: true})
+	}
+
+	console.log(`different question type`)
+	question._id = questionId
+	await questionModel.deleteOne({_id: questionId})
+	await specificModel.create(question)
+
+	return questionModel.findOneAndUpdate({_id: questionId}, {$set: question}, {new: true})
+}
 export const createQuestion = async (quizId, question) => {
 	delete question._id
 
