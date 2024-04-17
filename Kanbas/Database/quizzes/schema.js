@@ -37,7 +37,7 @@ const quizSchema = new mongoose.Schema({
 			validator: Number.isInteger,
 			message: 'points must be an integer. Was given {VALUE}'
 		},
-		default: 100
+		default: 0
 	},
 
 	assignmentGroup: {
